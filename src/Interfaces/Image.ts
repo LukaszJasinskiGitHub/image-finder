@@ -5,11 +5,7 @@ export interface Urls  {
   thumb: string;
 }
 
-export interface Image  {
+export default interface Image  {
   urls: Urls
   alt_description: string;
-}
-
-export interface ImageApiResponse  {
-  results: Image[];
 }

@@ -1,20 +1,15 @@
 import React, { FC, useContext } from 'react';
 import { Box, Button, Card, CardActions, CardContent, Tooltip, Typography } from '@mui/material';
-import { UserContext } from '../../context/UserContext/UserContext';
 import { useNavigate } from 'react-router-dom';
+
+import { UserContext } from '../../context/UserContext/UserContext';
 import { RoutesVars } from '../../const/constRoutes';
 
 const UserDetailsPage: FC = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
-  const handleOnClick = () => {
-    navigate(RoutesVars.ADD_USER_DETAILS);
-  };
-
-  if (!user.preferedTopic) {
-    navigate(RoutesVars.ADD_USER_DETAILS);
-  }
+  const handleOnClick = () => { navigate(RoutesVars.ADD_USER_DETAILS); };
 
   return (
     <div>
@@ -22,20 +17,20 @@ const UserDetailsPage: FC = () => {
         <Card sx={{ width: 345, background: "#ede7e7" }}>
           {!!user.img ? (
             <img
-              style={{ height: 200, width: '100%' }}
+              style={{ height: 250, width: '100%' }}
               alt="Image selected by user"
               src={user.img}
             />) : (
             <div style={{ fontSize: 20, height: 200, width: '100%', display: 'flex', alignItems: 'center', justifyContent: ' center' }}>
-              No result found...
+              Select your image...
             </div>
           )}
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Name: {user.name}
+              <strong>Name: </strong>{user.name}
             </Typography>
             <Typography gutterBottom variant="h5" component="div">
-              Surname: {user.surname}
+              <strong>Surname: </strong> {user.surname}
             </Typography>
           </CardContent>
           <CardActions sx={{ display: 'flex', justifyContent: ' center', fontWeight: 'bold' }}>

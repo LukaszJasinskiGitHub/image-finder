@@ -40,19 +40,18 @@ const AddDetailsForm: React.FC<Props> = ({ user = defaultUser, formSubmit, submi
       formSubmit(user);
     },
   });
-  { console.log(user); }
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <TextField
         fullWidth
         required
+        autoFocus
         id="name"
         name="name"
         label="Name"
         value={formik.values.name}
         onChange={formik.handleChange}
-        error={formik.touched.name && Boolean(formik.errors.name)}
-        helperText={formik.touched.name && formik.errors.name}
         sx={{ marginBottom: '12px' }}
       />
       <TextField
@@ -63,8 +62,6 @@ const AddDetailsForm: React.FC<Props> = ({ user = defaultUser, formSubmit, submi
         label="Surname"
         value={formik.values.surname}
         onChange={formik.handleChange}
-        error={formik.touched.surname && Boolean(formik.errors.surname)}
-        helperText={formik.touched.surname && formik.errors.surname}
         sx={{ mb: '12px' }}
       />
 
@@ -99,8 +96,6 @@ const AddDetailsForm: React.FC<Props> = ({ user = defaultUser, formSubmit, submi
             name="customTopic"
             value={customTopic}
             onChange={(event) => { setCustomTopic(event.target.value); }}
-            error={formik.touched.preferedTopic && Boolean(formik.errors.preferedTopic)}
-            helperText={formik.touched.preferedTopic && formik.errors.preferedTopic}
             sx={{ mb: '12px' }}
           />
         </>

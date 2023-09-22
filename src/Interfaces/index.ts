@@ -1,9 +1,8 @@
 
 import User from "./User";
-import { Image, ImageApiResponse } from "./Image";
+import Image from "./Image";
 
 export type {
   Image,
-  ImageApiResponse,
   User
 };
