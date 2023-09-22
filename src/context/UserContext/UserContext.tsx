@@ -1,15 +1,9 @@
 import React, { FC, ReactNode, createContext, useState } from "react";
+import { User } from "../../Interfaces";
 
 interface ProviderProps {
   children: ReactNode;
 }
-
-export type User = {
-  name: string,
-  surname: string,
-  preferedTopic: string;
-  img: string;
-};
 
 type Props = {
   user: User;

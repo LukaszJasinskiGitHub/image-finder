@@ -16,7 +16,7 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const MissingRoute = () => <Navigate to={{ pathname: RoutesVars.ADD_USER_DETAILS }} replace />;
+  const MissingRoute = () => <Navigate to={{ pathname: RoutesVars.USER_DETAILS }} replace />;
 
   return (
     <div>
@@ -24,8 +24,8 @@ function App() {
         <UserContextProvider>
           <BrowserRouter>
             <Routes>
-              <Route path={RoutesVars.ADD_USER_DETAILS} element={<AddUserDetailsPage />} />
               <Route path={RoutesVars.USER_DETAILS} element={<UserDetailsPage />} />
+              <Route path={RoutesVars.ADD_USER_DETAILS} element={<AddUserDetailsPage />} />
               <Route path={RoutesVars.SELECT_IMAGE} element={<SelectImagePage />} />
 
               <Route path="*" element={<MissingRoute />} />
