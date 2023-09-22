@@ -1,5 +1,5 @@
 import React, { FC, useContext, useMemo, useState } from 'react';
-import { Box, Card, CardActions, IconButton, LinearProgress } from '@mui/material';
+import { Alert, Box, Card, CardActions, IconButton, LinearProgress, Tooltip } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useNavigate } from 'react-router-dom';
@@ -14,9 +14,13 @@ const SelectImagePage: FC = () => {
   const navigate = useNavigate();
   const { user, actions: { saveUser } } = useContext(UserContext);
   const [images, setImages] = useState<Image[]>();
-  const [imageToDisplay, setImageToDisplay] = useState<number>(0);
+  const [imageToDisplay, setImageToDisplay] = useState<number>(1);
 
-  const { isLoading } = useQuery({
+  if (!user.preferedTopic) {
+    navigate(RoutesVars.ADD_USER_DETAILS);
+  }
+
+  const { isLoading, isError } = useQuery({
     queryKey: ['getImage', user.name, user.preferedTopic],
     queryFn: () => getImage(user.preferedTopic),
     onSuccess: (data: ImageApiResponse) => {
@@ -37,14 +41,11 @@ const SelectImagePage: FC = () => {
   const imageUrl = useMemo(() => user.img, [user.img]);
 
   if (isLoading) <LinearProgress />;
-
-  if (!user.preferedTopic) {
-    navigate(RoutesVars.ADD_USER_DETAILS);
-  }
+  if (isError) <Alert color='error' />;
 
   return (
     <div>
-      <Box sx={{ maxWidth: 1488, height: '100vh', display: 'flex', alignItems: 'center', justifyContent: ' center' }}>
+      <Box sx={{ height: '80vh', display: 'flex', alignItems: 'center', justifyContent: ' center' }}>
         <Card sx={{ width: 345, background: "#ede7e7" }}>
           {!!user.img ? (
             <img
@@ -52,17 +53,22 @@ const SelectImagePage: FC = () => {
               alt="Image selected by user"
               src={imageUrl}
             />) :
-            <div style={{ fontSize: 20, height: 200, width: '100%', display: 'flex', alignItems: 'center', justifyContent: ' center' }}>
-              No result found...
-            </div>
-          }
+            (
+              <div style={{ fontSize: 20, height: 200, width: '100%', display: 'flex', alignItems: 'center', justifyContent: ' center' }}>
+                No result found...
+              </div>
+            )}
           <CardActions sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <IconButton color='success' onClick={handleOnAcceptClick}>
-              <CheckCircleIcon sx={{ width: 50, height: 50 }} />
-            </IconButton>
-            <IconButton color='error' onClick={handleOnRejectClick}>
-              <CancelIcon sx={{ width: 50, height: 50 }} />
-            </IconButton>
+            <Tooltip title="Accept picture">
+              <IconButton color='success' onClick={handleOnAcceptClick}>
+                <CheckCircleIcon sx={{ width: 50, height: 50 }} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Reject picture">
+              <IconButton color='error' onClick={handleOnRejectClick}>
+                <CancelIcon sx={{ width: 50, height: 50 }} />
+              </IconButton>
+            </Tooltip>
           </CardActions>
         </Card>
       </Box>

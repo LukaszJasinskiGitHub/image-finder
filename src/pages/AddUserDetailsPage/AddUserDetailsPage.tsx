@@ -18,7 +18,7 @@ const AddUserDetailsPage: FC = () => {
 
   return (
     <div>
-      <Box sx={{ px: 2, maxWidth: 700, m: '0 auto' }}>
+      <Box sx={{ px: 2, maxWidth: 700, m: '40px auto' }}>
         <Typography
           sx={{ mb: 3, textAlign: 'center', fontSize: 32, fontStyle: 'italic', fontWeight: 'bold', textTransform: 'uppercase' }}>
           Fill user details

@@ -13,3 +13,9 @@ export const PreferredTopicsOptions = [
   {name: PreferredTopicsType.TECHNOLOGY, key: Object.keys(PreferredTopicsType)[3]},
   {name: PreferredTopicsType.OTHER, key: Object.keys(PreferredTopicsType)[4]},
 ];
+
+export enum PreferredTopicsKeys {
+  OTHER = 'OTHER',
+}
+
+export const PreferredTopicsList = ['TRAVEL', 'CARS', 'WILDLIFE', 'TECHNOLOGY', 'OTHER'];

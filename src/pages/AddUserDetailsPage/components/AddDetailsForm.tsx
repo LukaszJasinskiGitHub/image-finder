@@ -3,7 +3,7 @@ import { Button, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 
 import { User } from '../../../Interfaces';
-import { PreferredTopicsOptions } from '../../../const/constPreferredTopics';
+import { PreferredTopicsKeys, PreferredTopicsList, PreferredTopicsOptions } from '../../../const/constPreferredTopics';
 
 interface Props {
   formSubmit: (user: User) => void;
@@ -19,27 +19,28 @@ const defaultUser = {
 };
 
 const AddDetailsForm: React.FC<Props> = ({ user = defaultUser, formSubmit, submitText }) => {
-  const [customTopic, setCustomTopic] = useState('');
+  const initialCustomTopic = !PreferredTopicsList.includes(user.preferedTopic) ? user.preferedTopic : '';
+  const [customTopic, setCustomTopic] = useState(initialCustomTopic);
 
   const formik = useFormik({
     initialValues: {
       name: user.name,
       surname: user.surname,
-      preferedTopic: user.preferedTopic,
+      preferedTopic: PreferredTopicsList.includes(user.preferedTopic) ? user.preferedTopic : PreferredTopicsKeys.OTHER,
       img: user.img,
     },
     onSubmit: (values) => {
       const user: User = {
         name: values.name,
         surname: values.surname,
-        preferedTopic: values.preferedTopic !== "OTHER" ? values.preferedTopic : customTopic,
+        preferedTopic: values.preferedTopic !== PreferredTopicsKeys.OTHER ? values.preferedTopic : customTopic,
         img: values.img,
       };
-      { console.log(formik.values); }
+
       formSubmit(user);
     },
   });
-
+  { console.log(user); }
   return (
     <form onSubmit={formik.handleSubmit}>
       <TextField

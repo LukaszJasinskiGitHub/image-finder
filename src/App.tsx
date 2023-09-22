@@ -16,7 +16,7 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const MissingRoute = () => <Navigate to={{ pathname: RoutesVars.USER_DETAILS }} replace />;
+  const MissingRoute = () => <Navigate to={{ pathname: RoutesVars.ADD_USER_DETAILS }} replace />;
 
   return (
     <div>
